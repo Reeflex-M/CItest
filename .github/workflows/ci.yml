@@ -36,6 +36,12 @@ jobs:
       run: |
         java -cp "build:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore CalculatorTest
     
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: class-files
+        path: build/
+    
     - name: Setup Pages
       uses: actions/configure-pages@v3
     
@@ -95,7 +101,7 @@ jobs:
         # Create .nojekyll file in the root
         touch _site/.nojekyll
         
-    - name: Upload artifact
+    - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v1
       with:
         path: '_site'
