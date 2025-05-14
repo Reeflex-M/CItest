@@ -42,23 +42,30 @@ jobs:
     
     - name: Deploy to GitHub Pages
       run: |
+        # Configurer Git
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
+        
+        # Créer un dossier temporaire pour sauvegarder les fichiers
+        mkdir -p /tmp/gh-pages-files
+        cp -r docs/ /tmp/gh-pages-files/docs
+        cp index.html /tmp/gh-pages-files/
         
         # Créer une branche gh-pages
         git checkout --orphan gh-pages
         
-        # Supprimer tous les fichiers sauf docs/, index.html, et .nojekyll
-        git rm -rf --cached .
-        git clean -fd
+        # Supprimer tous les fichiers
+        git rm -rf .
+        
+        # Restaurer les fichiers nécessaires
+        cp -r /tmp/gh-pages-files/docs .
+        cp /tmp/gh-pages-files/index.html .
         
         # S'assurer que .nojekyll existe
         touch .nojekyll
         
         # Ajouter les fichiers nécessaires
-        git add index.html
-        git add docs/
-        git add .nojekyll
+        git add -A
         
         # Faire un commit
         git commit -m "Deploy to GitHub Pages"
