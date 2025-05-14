@@ -33,6 +33,7 @@ jobs:
     - name: Create Documentation Assets
       run: |
         mkdir -p docs/assets/images
+        touch docs/.nojekyll
         
     - name: Create Build Info
       run: |
