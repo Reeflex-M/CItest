@@ -7,7 +7,7 @@ title: À propos
 
 ## Objectif
 
-Ce projt a été créé pour démontrer l'intégration continue avec GitHub Actions pour un projet Java simple. Il sert de référence pour la mise en place d'un pipeline CI/CD complet avec déploiement automatique sur GitHub Pages.
+Ce projet a été créé pour démontrer l'intégration continue avec GitHub Actions pour un projet Java simple. Il sert de référence pour la mise en place d'un pipeline CI/CD complet avec déploiement automatique sur GitHub Pages.
 
 ## Technologies utilisées
 
