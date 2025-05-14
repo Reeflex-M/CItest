@@ -1,5 +1,7 @@
 # Calculator Java Project
 
+[![Java CI with JUnit and GitHub Pages Deployment](https://github.com/Reeflex-M/CItest/actions/workflows/ci.yml/badge.svg)](https://github.com/Reeflex-M/CItest/actions/workflows/ci.yml)
+
 Un projet Java simple avec une calculatrice et des tests JUnit.
 
 ## Structure du projet
@@ -36,4 +38,4 @@ https://[votre-nom-utilisateur].github.io/[nom-du-repo]/
 2. Compilez le code: `javac -d build -cp lib/junit-4.13.2.jar src/*.java tests/*.java`
 3. Exécutez les tests: `java -cp build:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore CalculatorTest`
 4. Exécutez l'application: `java -cp build Calculator`
-"# CItest" 
+   "# CItest"
