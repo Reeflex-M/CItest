@@ -29,39 +29,49 @@ jobs:
     - name: Run JUnit Tests
       run: |
         java -cp "build:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore CalculatorTest
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
         
-    - name: Create Documentation Assets
+    - name: Create site files
       run: |
-        mkdir -p docs/assets/images
-        touch docs/.nojekyll
-        touch .nojekyll
+        # Create a temporary directory for site files
+        mkdir -p _site
         
-    - name: Create Build Info
-      run: |
-        echo "Last successful build: $(date)" > docs/build_info.txt
-        echo "Commit: ${{ github.sha }}" >> docs/build_info.txt
-        echo "Build number: ${{ github.run_number }}" >> docs/build_info.txt
+        # Copy all docs content to _site
+        cp -r docs/* _site/
         
-    - name: Deploy to GitHub Pages (from docs folder)
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      uses: JamesIves/github-pages-deploy-action@v4
+        # Create .nojekyll file
+        touch _site/.nojekyll
+        
+        # Create a root index.html that redirects to the actual index
+        cat > _site/index.html << 'EOF'
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Projet Calculatrice Java</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+          </head>
+          <body>
+            <h1>Projet Calculatrice Java</h1>
+            <p>Bienvenue sur la documentation du projet Calculatrice Java.</p>
+            <ul>
+              <li><a href="fonctionnalites.html">Fonctionnalités</a></li>
+              <li><a href="api.html">Documentation API</a></li>
+              <li><a href="tutoriel.html">Tutoriel</a></li>
+              <li><a href="about.html">À propos</a></li>
+            </ul>
+          </body>
+        </html>
+        EOF
+        
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
       with:
-        folder: docs
-        branch: gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
-        clean: true
+        path: '_site'
         
-    - name: Copy docs to root for direct deployment
+    - name: Deploy to GitHub Pages
+      id: deployment
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      run: |
-        cp -r docs/* .
-        cp docs/.nojekyll .
-        
-    - name: Deploy to GitHub Pages (from root)
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: .
-        branch: root-gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
-        clean: true 
+      uses: actions/deploy-pages@v2 
