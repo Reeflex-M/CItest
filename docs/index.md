@@ -1,6 +1,20 @@
+---
+layout: default
+title: Accueil
+---
+
 # Projet Calculatrice Java
 
 Bienvenue sur la documentation du projet Calculatrice Java généré automatiquement par GitHub Actions.
+
+[![Statut CI](https://github.com/Reeflex-M/CItest/actions/workflows/ci.yml/badge.svg)](https://github.com/Reeflex-M/CItest/actions/workflows/ci.yml)
+
+## Navigation
+
+- [Fonctionnalités](fonctionnalites.html)
+- [Documentation API](api.html)
+- [Tutoriel](tutoriel.html)
+- [À propos](about.html)
 
 ## À propos du projet
 

@@ -1,0 +1,7 @@
+theme: jekyll-theme-cayman
+title: Projet Calculatrice Java
+description: Documentation et démonstration du projet de calculatrice Java avec intégration continue
+show_downloads: true
+google_analytics:
+github:
+  repository_url: https://github.com/Reeflex-M/CItest 

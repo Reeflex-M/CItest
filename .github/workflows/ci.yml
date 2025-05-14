@@ -30,15 +30,15 @@ jobs:
       run: |
         java -cp "build:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore CalculatorTest
         
-    - name: Create Documentation
+    - name: Create Documentation Assets
       run: |
-        mkdir -p docs
-        echo "# Calculator Java Project" > docs/index.md
-        echo "## Automated CI/CD with GitHub Actions" >> docs/index.md
-        echo "Last successful build: $(date)" >> docs/index.md
-        if [ -f docs/index.md.bak ]; then
-          cat docs/index.md.bak >> docs/index.md
-        fi
+        mkdir -p docs/assets/images
+        
+    - name: Create Build Info
+      run: |
+        echo "Last successful build: $(date)" > docs/build_info.txt
+        echo "Commit: ${{ github.sha }}" >> docs/build_info.txt
+        echo "Build number: ${{ github.run_number }}" >> docs/build_info.txt
         
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
