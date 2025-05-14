@@ -9,11 +9,6 @@ on:
 # Explicitly declare dependency versions
 env:
   JAVA_VERSION: '11'
-  UPLOAD_PAGES_VERSION: 'v1'
-  DEPLOY_PAGES_VERSION: 'v2'
-  CONFIGURE_PAGES_VERSION: 'v3'
-  CHECKOUT_VERSION: 'v3'
-  SETUP_JAVA_VERSION: 'v3'
 
 jobs:
   build:
@@ -57,4 +52,4 @@ jobs:
         
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v2 
+      uses: actions/deploy-pages@v2
