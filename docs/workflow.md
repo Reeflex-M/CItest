@@ -21,9 +21,15 @@ Chaque fois qu'un commit est poussé sur la branche principale (`main` ou `maste
    - Les tests JUnit sont exécutés
    - Si les tests échouent, le workflow s'arrête
 
-3. **Déploiement sur GitHub Pages**
-   - La documentation (dossier `docs`) est automatiquement déployée
-   - La page d'accueil est mise à jour
+3. **Préparation des fichiers**
+
+   - Copie des fichiers nécessaires dans le dossier `docs/`
+   - Création du fichier `.nojekyll` si nécessaire
+
+4. **Déploiement sur GitHub Pages**
+   - Configuration de GitHub Pages
+   - Téléchargement des artefacts
+   - Déploiement du site
    - Le site est accessible à l'URL: `https://[username].github.io/[repo-name]/`
 
 ## Configuration
@@ -33,7 +39,6 @@ Le workflow est défini dans le fichier `.github/workflows/ci.yml` et utilise le
 - `actions/checkout@v3` - Pour récupérer le code source
 - `actions/setup-java@v3` - Pour configurer l'environnement Java
 - `actions/configure-pages@v3` - Pour configurer GitHub Pages
-- `JamesIves/github-pages-deploy-action@v4` - Pour déployer sur GitHub Pages
 - `actions/upload-pages-artifact@v2` - Pour télécharger les artefacts
 - `actions/deploy-pages@v2` - Pour déployer le site
 
