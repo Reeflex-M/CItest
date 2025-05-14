@@ -36,12 +36,6 @@ jobs:
       run: |
         java -cp "build:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore CalculatorTest
     
-    - name: Upload test artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: class-files
-        path: build/
-    
     - name: Setup Pages
       uses: actions/configure-pages@v3
     
@@ -50,50 +44,8 @@ jobs:
         # Create a temporary directory for site files
         mkdir -p _site
         
-        # Create index.html in the root that links to all documentation pages
-        cat > _site/index.html << 'EOF'
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <title>Projet Calculatrice Java</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <style>
-              body {
-                font-family: Arial, sans-serif;
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 20px;
-                line-height: 1.6;
-              }
-              h1 {
-                color: #2c3e50;
-              }
-              ul {
-                padding-left: 20px;
-              }
-              a {
-                color: #3498db;
-                text-decoration: none;
-              }
-              a:hover {
-                text-decoration: underline;
-              }
-            </style>
-          </head>
-          <body>
-            <h1>Projet Calculatrice Java</h1>
-            <p>Bienvenue sur la documentation du projet Calculatrice Java.</p>
-            <ul>
-              <li><a href="docs/index.html">Accueil</a></li>
-              <li><a href="docs/fonctionnalites.html">Fonctionnalités</a></li>
-              <li><a href="docs/api.html">Documentation API</a></li>
-              <li><a href="docs/tutoriel.html">Tutoriel</a></li>
-              <li><a href="docs/about.html">À propos</a></li>
-            </ul>
-          </body>
-        </html>
-        EOF
+        # Copy the existing index.html
+        cp index.html _site/
         
         # Copy docs directory to _site
         cp -r docs _site/
