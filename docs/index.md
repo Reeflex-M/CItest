@@ -14,6 +14,7 @@ Bienvenue sur la documentation du projet Calculatrice Java généré automatique
 - [Fonctionnalités](fonctionnalites.html)
 - [Documentation API](api.html)
 - [Tutoriel](tutoriel.html)
+- [Workflow CI/CD](workflow.html)
 - [À propos](about.html)
 
 ## À propos du projet
