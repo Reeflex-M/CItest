@@ -34,6 +34,7 @@ jobs:
       run: |
         mkdir -p docs/assets/images
         touch docs/.nojekyll
+        touch .nojekyll
         
     - name: Create Build Info
       run: |
@@ -41,11 +42,26 @@ jobs:
         echo "Commit: ${{ github.sha }}" >> docs/build_info.txt
         echo "Build number: ${{ github.run_number }}" >> docs/build_info.txt
         
-    - name: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages (from docs folder)
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: docs
         branch: gh-pages
+        token: ${{ secrets.GITHUB_TOKEN }}
+        clean: true
+        
+    - name: Copy docs to root for direct deployment
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      run: |
+        cp -r docs/* .
+        cp docs/.nojekyll .
+        
+    - name: Deploy to GitHub Pages (from root)
+      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: .
+        branch: root-gh-pages
         token: ${{ secrets.GITHUB_TOKEN }}
         clean: true 
