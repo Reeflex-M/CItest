@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [ main, master ]
 
+# Explicitly declare dependency versions
+env:
+  JAVA_VERSION: '11'
+  UPLOAD_PAGES_VERSION: 'v1'
+  DEPLOY_PAGES_VERSION: 'v2'
+  CONFIGURE_PAGES_VERSION: 'v3'
+  CHECKOUT_VERSION: 'v3'
+  SETUP_JAVA_VERSION: 'v3'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,9 +28,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
     
-    - name: Set up JDK 11
+    - name: Set up JDK
       uses: actions/setup-java@v3
       with:
         java-version: '11'
@@ -39,25 +49,19 @@ jobs:
     - name: Setup Pages
       uses: actions/configure-pages@v3
     
-    - name: Create site files
+    - name: Prepare site files
       run: |
-        # Create a temporary directory for site files
         mkdir -p _site
-        
-        # Copy the existing index.html
         cp index.html _site/
-        
-        # Copy docs directory to _site
         cp -r docs _site/
-        
-        # Create .nojekyll file in the root
-        touch _site/.nojekyll
-        
-    - name: Upload Pages artifact
+        cp .nojekyll _site/ || touch _site/.nojekyll
+        ls -la _site/
+    
+    - name: Deploy to GitHub Pages
       uses: actions/upload-pages-artifact@v1
       with:
-        path: '_site'
-        
+        path: _site
+    
     - name: Deploy to GitHub Pages
       id: deployment
       if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
